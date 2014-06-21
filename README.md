@@ -1,7 +1,10 @@
-##Tyler Byers
-##Getting and Cleaning Data
-##Coursera Course Project
-##21 June 2014
+Tyler Byers
+
+Getting and Cleaning Data
+
+Coursera Course Project
+
+21 June 2014
 
 ------
 ###PROJECT DESCRIPTION (from project instructions page):
@@ -29,22 +32,23 @@ Good luck!
 As instructed, I created a run_analysis.R script to complete this project.
 
 Please see the script, which has fairly good documentation for each section of code.  Below is what I did "in general".
-1. Loaded the list of the features. Created a variable `featureNames` to hold the features list. Pre-pended this list with `activity`, `subject`, and `datatype` variables (the datatype variable holds whether the data is from the testing or training data set).
-2. Loaded the activity key 
-3. Loaded the training data set
+
+ 1. Loaded the list of the features. Created a variable `featureNames` to hold the features list. Pre-pended this list with `activity`, `subject`, and `datatype` variables (the datatype variable holds whether the data is from the testing or training data set).
+ 2. Loaded the activity key 
+ 3. Loaded the training data set
   1. Load the X_train and subject_train data sets.
   2. Load the Y_train data set.
   3. Within the `ytrain` data frame, create new variable that takes the activity number and converts it to an activity name using the activity key.
   4. Combine the subject_train, activity name, datatype, and xtrain data into a single data frame.
   5. Set the variable names in data frame to be the ones that we set in list item 1.
-4. Repeat step 3, but with the test data set.
-5. Merge the two data sets using an `rbind` command.
-6. Filter out all the columns that aren't `mean` or `std`.  Also filtered out the `meanFreq` columns, which took an extra step since the `grep` command grabbed the `meanFreq` columns.
-7. Create new data frame with only the `subject`, `activity`, and `mean` and `std` variables.
-8. Fix the names to take out the special characters.  This operation created some double dot (..) characters, so had to replace those as well.
+ 4. Repeat step 3, but with the test data set.
+ 5. Merge the two data sets using an `rbind` command.
+ 6. Filter out all the columns that aren't `mean` or `std`.  Also filtered out the `meanFreq` columns, which took an extra step since the `grep` command grabbed the `meanFreq` columns.
+ 7. Create new data frame with only the `subject`, `activity`, and `mean` and `std` variables.
+ 8. Fix the names to take out the special characters.  This operation created some double dot (..) characters, so had to replace those as well.
   * In class we talked about taking dots out of variable names. I sort of disagree, and left them in because it makes reading the variable names easier IMHO, especially with so many closely-related variables.
-9. Create new set vectors of the subjects and activities.  Will use this in the next step.
-10. Looping through each combination of subject and activity, the for-loop creates subsets of the data for each combination, then takes the mean of every single column.  
+ 9. Create new set vectors of the subjects and activities.  Will use this in the next step.
+ 10. Looping through each combination of subject and activity, the for-loop creates subsets of the data for each combination, then takes the mean of every single column.  
   * Because I use an `lapply` function, it also tried to take the mean of the activity names, which doesn't work, so at the end of the loop I have to add back in the activity name.
   * This operation creates a new data frame (colMeans).  I then either create a `dataOutput` data frame if it doesn't exist, or rbind colMeans to dataOutput.  
-11. Finally the script writes out the `dataOutput` data frame to a text file, removing row names.
+ 11. Finally the script writes out the `dataOutput` data frame to a text file, removing row names.
